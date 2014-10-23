@@ -3,6 +3,7 @@ import java.sql.SQLException;
 import model.QOTD.QOTDModel;
 import model.calendar.Event;
 import model.note.Note;
+import JsonClasses.AuthUser;
 import JsonClasses.CalendarInfo;
 import JsonClasses.CreateCalender;
 import JsonClasses.DeleteCalender;
@@ -42,7 +43,9 @@ public class GiantSwitch {
 		 ** LOGIN **
 		 **********/
 		case "logIn":
+			AuthUser AU = (AuthUser)gson.fromJson(jsonString, AuthUser.class);
 			System.out.println("Recieved logIn");
+			answer = SW.authenticate(AU.getAuthUserEmail(), AU.getAuthUserPassword(), AU.getAuthUserIsAdmin());
 			break;
 
 		case "logOut":
